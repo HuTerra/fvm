@@ -33,10 +33,14 @@ var padRight = function(str, len) {
   return str;
 };
 
-https.get({
-  host: 'api.github.com',
+var req = https.request({
+  hostname: 'api.github.com',
   port: 443,
-  path: '/repos/theVolary/feather/tags'
+  path: '/repos/theVolary/feather/tags',
+  method: 'GET',
+  headers: {
+    'User-Agent': 'Feather-Version-Manager'
+  }
 }, function(res) {
   var tagDataBuf = "";
   res.setEncoding('utf8');
@@ -44,6 +48,7 @@ https.get({
     tagDataBuf += chunk;
   });
   res.on('end', function( ) {
+    console.log(tagDataBuf);
     var tagData = JSON.parse(tagDataBuf);
     var tags = [];
     var i = 0;
@@ -67,6 +72,10 @@ https.get({
       console.log(line);
     }
   });
-}).on('error', function(e) {
+});
+
+req.end();
+
+req.on('error', function(e) {
   console.log(e);
 });
