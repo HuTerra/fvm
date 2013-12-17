@@ -19,3 +19,6 @@ Just like with nvm, we like to edit our .bashrc file so that fvm.sh is sourced a
     fvm use v0.1.3
    
 (and of course you would update the final line to use a new version as you upgrade the "default" version on your machine)
+
+### Information and Commands
+In addition to those mentioned above, fvm also has an `ls` command to list all the versions of feather, including those installed on your server.  Just run `fvm ls`.
