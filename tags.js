@@ -48,27 +48,27 @@ var req = https.request({
     tagDataBuf += chunk;
   });
   res.on('end', function( ) {
-    console.log(tagDataBuf);
+    //console.log(tagDataBuf);
     var tagData = JSON.parse(tagDataBuf);
     var tags = [];
     var i = 0;
-    for (i = 0; i < tagData.length; i++) { 
+    for (i = 0; i < tagData.length; i++) {
       tags.push(tagData[i].name);
     }
     tags.sort();
     var width = getMaxTagNameLength(tags);
     var maxPerLine = Math.floor(120 / width);
     var line = "", i, j;
-    
+
     console.log("Available Tags (\033[1;34mBlue\033[0m are installed, \033[1;32mGreen\033[0m is in use.)");
-    
+
     for (i = 0; i < tags.length; i+= maxPerLine) {
       line = "";
       for(j = 0; j < maxPerLine; j++) {
         if (i+j < tags.length) {
           line += installCheck(padRight(tags[i+j], width)) + ' ';
         }
-      } 
+      }
       console.log(line);
     }
   });
